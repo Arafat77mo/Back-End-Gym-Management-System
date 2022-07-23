@@ -36,6 +36,11 @@ trait GeneralTrait
             'status' => true,
             'errNum' => "S000",
             'msg' => $msg,
+
+            'status' => true,
+            'errNum' => "S000",
+            'msg' => $msg,
+            $key => $value
         ]);
     }
 
@@ -229,4 +234,5 @@ trait GeneralTrait
     }
 
 
+}
 }
