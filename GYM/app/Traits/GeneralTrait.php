@@ -32,6 +32,11 @@ trait GeneralTrait
     public function returnData($key, $value, $msg = "")
     {
         return response()->json([
+            $key => $value,
+            'status' => true,
+            'errNum' => "S000",
+            'msg' => $msg,
+
             'status' => true,
             'errNum' => "S000",
             'msg' => $msg,
@@ -229,4 +234,5 @@ trait GeneralTrait
     }
 
 
+}
 }

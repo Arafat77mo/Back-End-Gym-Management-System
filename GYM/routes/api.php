@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\api\ClassesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -54,7 +55,12 @@ Route::group([
 
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
 
-//
+Route::post('addclass',[ClassesController::class,'store']); // create
+
+Route::put('newClass/{id}',[ClassesController::class,'update']); //update
+
+Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
+
 
 
 
@@ -69,4 +75,16 @@ Route::get('/products/{id}',[ProductController::class,'show']);
 
 
 
+///classes
+
+Route::get('allclass',[ClassesController::class,'index']); // getall
+Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
+Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
+// Route::get('test',[ClassesController::class,'test']); // for testing
+Route::get('todayclass',[ClassesController::class,'TodayClass']);
+Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+
+
+
 }) ;
+
