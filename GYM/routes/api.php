@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\api\ClassesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ use App\Http\Controllers\AdminController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
 
 Route::group([
     'middleware' => 'api',
@@ -51,17 +53,27 @@ Route::group([
 });
 
 
+
+
+
+// Relationships
+
+Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
+
 //middleware Admin
 
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
-
+//classes
 Route::post('addclass',[ClassesController::class,'store']); // create
 
 Route::put('newClass/{id}',[ClassesController::class,'update']); //update
 
 Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
 
-
+//trainer
+Route::post('/trainers',[TrainerController::class,'store']);
+Route::post('/trainer/{id}',[TrainerController::class,'update']);
+Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
 
 
 }) ;
@@ -70,6 +82,7 @@ Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
 ////middleware user
 Route::group(['prefix' => 'user' ,'middleware' => 'checkAdminToken:api'],function (){
 
+//products
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
 
@@ -84,7 +97,11 @@ Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrai
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
 
+//trainer
+Route::get('/trainers',[TrainerController::class,'index']);
+Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
 
 }) ;
+
 
