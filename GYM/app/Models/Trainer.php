@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\session;
 
 class Trainer extends Model
 {
@@ -15,5 +16,10 @@ class Trainer extends Model
     public function sessions () {
 
         return $this -> belongsTo('App\Models\Session','session_id');
+
+
+    public function session(){
+        return $this->belongsTo(Session::class,'session_id');
+
     }
 }
