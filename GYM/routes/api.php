@@ -33,4 +33,7 @@ Route::put('newClass/{id}',[ClassesController::class,'update']); //update
 Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
 Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
 Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
+// Route::get('test',[ClassesController::class,'test']); // for testing
+Route::get('todayclass',[ClassesController::class,'TodayClass']);
+Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
 

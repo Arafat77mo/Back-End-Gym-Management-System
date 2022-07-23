@@ -8,6 +8,8 @@ use App\Traits\GeneralTrait;
 use  App\Models\Session;
 use App\Http\Resources\classResource;
 use Validator;
+use Carbon\Carbon;
+
 
 class ClassesController extends Controller
 {
@@ -124,10 +126,31 @@ class ClassesController extends Controller
             // echo $trainerName;
             }
             return $this->returnData('TrainerName',$trainerName,'trainerNameSuccefully','200');
-
-
-
-
         }
+
+        // public function test(){
+        //     // return Carbon::now()->format('M'); //
+        //    return Carbon::tomorrow()->format('l');
+        //     return Carbon::today()->format('l');
+        // }
+
+        public function TodayClass(){
+
+            $today = Carbon::today()->format('l');
+            $class = classResource::collection(Session::where('Day',$today)->get());
+
+            return $this->returnData('Our Class Today',$class,'classesToday','200');
+        }
+
+
+        public function NextDayClass(){
+
+            $tomorrow = Carbon::tomorrow()->format('l');;
+            $class = classResource::collection(Session::where('Day',$tomorrow)->get());
+
+            return $this->returnData('Our Class NextDay',$class,'classessTomorrow','200');
+        }
+
+
 
 }
