@@ -18,8 +18,7 @@ class Trainer extends Model
         return $this -> belongsTo('App\Models\Session','session_id');
 
 
-    public function session(){
-        return $this->belongsTo(Session::class,'session_id');
+
 
     }
 }

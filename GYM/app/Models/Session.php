@@ -13,7 +13,7 @@ class Session extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "sessions";
-    protected $fillable = ['name'];
+  
 
     public function trainers () {
 
@@ -22,8 +22,6 @@ class Session extends Model
 
     protected $fillable = ['name','Duaration','discount','description','price','Day','Time','image'];
 
-    public function trainers(){
-        return $this->hasMany(Trainer::class,'session_id');
-    }
+
 
 }

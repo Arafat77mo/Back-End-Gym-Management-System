@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\api\ClassesController;
+use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -10,20 +11,6 @@ use App\Models\Admin;
 use App\Http\Controllers\AdminController;
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes 
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API! 
-|
-*/
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 
 Route::group([
@@ -34,14 +21,14 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('checkAdminToken:api');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);   
-    
-     
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+
 });
 
 
 Route::group([
-   
+
     'prefix' => 'admin','namespace'=>'Admin'
 ], function ($router) {
 
@@ -57,12 +44,14 @@ Route::group([
 
 
 // Relationships
-
 Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
 
 //middleware Admin
-
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
+//users
+Route::get('/users/status/{user_id}/{status_code}',[AuthController::class,'updateStatus'])->name('users.status.update');
+Route::get('/users',[AuthController::class,'index']);
+
 //classes
 Route::post('addclass',[ClassesController::class,'store']); // create
 
@@ -87,12 +76,11 @@ Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
 
 
-
 ///classes
-
 Route::get('allclass',[ClassesController::class,'index']); // getall
 Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
 Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
+
 // Route::get('test',[ClassesController::class,'test']); // for testing
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);

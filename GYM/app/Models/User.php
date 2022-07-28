@@ -27,6 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'phone',
         'gender',
+        'status',
     ];
 
     /**
@@ -57,5 +58,5 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims() {
         return [];
-    }    
+    }
 }
