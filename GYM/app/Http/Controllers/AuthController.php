@@ -50,7 +50,7 @@ class AuthController extends Controller
                 return $this->returnError('E001', 'بيانات الدخول غير صحيحة');
 
             $user = Auth::guard('api')->user();
-            $user ->api_token = $token;
+            $user -> access_token = $token;
             //return token
             return $this->returnData('user', $user);  //return json response
 
@@ -71,13 +71,19 @@ class AuthController extends Controller
             'address' =>'required',
             'phone' =>'required',
             'gender' =>'required',
+            'image' =>'required',
+
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
+        $fileSystem = "";
+            $fileSystem = uploadImage("users",$request->image);
         $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password)]
+                    ['password' => bcrypt($request->password),
+                    "image" => $fileSystem
+                    ]
                 ));
         return response()->json([
             'message' => 'User successfully registered',

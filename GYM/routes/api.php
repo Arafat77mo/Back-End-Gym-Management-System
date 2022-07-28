@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Admin;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MessagesController;
 
 
 /*
@@ -62,7 +63,11 @@ Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
 
 //middleware Admin
 
+
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
+    Route::post('messages', [MessagesController::class, 'sendMessage']);
+    Route::post('messageDirect', [MessagesController::class, 'sendDirectMessage']); 
+
 //classes
 Route::post('addclass',[ClassesController::class,'store']); // create
 
@@ -80,7 +85,7 @@ Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
 
 
 ////middleware user
-Route::group(['prefix' => 'user' ,'middleware' => 'checkAdminToken:api'],function (){
+Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
 
 //products
 Route::get('/products',[ProductController::class,'index']);
