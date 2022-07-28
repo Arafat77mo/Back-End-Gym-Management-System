@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -15,9 +16,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
+    // public function __construct() {
+    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    // }
     /**
      * Get a JWT via given credentials.
      *
@@ -147,5 +148,30 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+
+    public function index()
+    {
+        $users = UserResource::collection(User::get());
+        return response($users, 200);
+    }
+
+    public function updateStatus ($user_id, $status_code) {
+
+        try {
+           $update_user = User::whereId($user_id)->update([
+                'status' => $status_code
+            ]);
+
+            if ($update_user) {
+                return redirect()->route('users.index')->with('success', 'User Status Updated Successfully.');
+            }
+            return redirect()->route('users.index')->with('error', 'Fail to update user status.');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
     }
 }
