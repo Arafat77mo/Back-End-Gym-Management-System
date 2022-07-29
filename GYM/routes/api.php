@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\api\ClassesController;
+use App\Http\Controllers\api\MemeberShipController;
+use App\Http\Controllers\api\verification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -27,7 +29,7 @@ Route::get('/products/{id}',[ProductController::class,'show']);
 
 ///classes
 
-Route::post('addclass',[ClassesController::class,'store']); // create
+Route::post('addclass',[ClassesController::class,'store']); // create   
 Route::get('allclass',[ClassesController::class,'index']); // getall
 Route::put('newClass/{id}',[ClassesController::class,'update']); //update
 Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
@@ -36,4 +38,23 @@ Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrai
 // Route::get('test',[ClassesController::class,'test']); // for testing
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+
+/// membership
+Route::post('addmembership',[MemeberShipController::class,'store']); // create   
+Route::get('allmembership',[MemeberShipController::class,'index']); // getall
+Route::put('newmembership/{id}',[MemeberShipController::class,'update']); //update
+Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
+Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //destory
+
+// RelatedProducts
+Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
+
+// VerificationEmail
+Route::post('emailVerification',[verification::class,'verifyEmail']);
+Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('verification.verify');
+
+
+
+
+
 
