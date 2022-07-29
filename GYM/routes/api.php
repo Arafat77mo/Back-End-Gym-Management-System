@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Admin;
 use App\Http\Controllers\AdminController;
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes 
@@ -69,7 +67,7 @@ Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //
 //   -------------------------------------------------------------------- // 
 
 ////middleware user
-Route::group(['prefix' => 'user' ,'middleware' => 'checkAdminToken:api'],function (){
+Route::group(['prefix' => 'user'],function (){
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
 ///classes

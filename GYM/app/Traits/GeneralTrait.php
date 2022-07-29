@@ -232,7 +232,5 @@ trait GeneralTrait
         else
             return "";
     }
-
-
 }
-}
+
