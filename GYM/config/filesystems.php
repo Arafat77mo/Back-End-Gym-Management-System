@@ -65,6 +65,23 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'trainers' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/Trainers/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
+        
+        'users' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/users/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
+
+
     ],
 
     /*
@@ -81,5 +98,6 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
 
 ];

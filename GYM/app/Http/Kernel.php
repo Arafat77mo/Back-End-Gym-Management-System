@@ -40,9 +40,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CheckBanned::class,
         ],
     ];
 
@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
                 'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
 
         'checkAdminToken'=> \App\Http\Middleware\checkAdminToken::class,
+        'guest' => \App\Http\Middleware\CORS::class,
 
             ];
 }

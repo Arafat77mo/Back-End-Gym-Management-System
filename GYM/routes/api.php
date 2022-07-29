@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\api\ClassesController;
 use App\Http\Controllers\api\MemeberShipController;
 use App\Http\Controllers\api\verification;
+use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -19,10 +21,10 @@ use App\Http\Controllers\AdminController;
 | is assigned the "api" middleware group. Enjoy building your API! 
 |
 */
+use App\Http\Controllers\MessagesController;
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
+
 
 Route::group([
     'middleware' => 'api',
@@ -32,14 +34,14 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('checkAdminToken:api');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);   
-    
-     
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+
 });
 
 
 Route::group([
-   
+
     'prefix' => 'admin','namespace'=>'Admin'
 ], function ($router) {
 
@@ -49,11 +51,27 @@ Route::group([
 });
 
 //   -------------------------------------------------------------------- // 
+
+
+
+
+// Relationships
+Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
+
 //middleware Admin
 
+
+
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
+    Route::post('messages', [MessagesController::class, 'sendMessage']);
+    Route::post('messageDirect', [MessagesController::class, 'sendDirectMessage']); 
+
+//users
+Route::get('/users/status/{user_id}/{status_code}',[AuthController::class,'updateStatus'])->name('users.status.update');
+Route::get('/users',[AuthController::class,'index']);
 
     //classes
+//classes
 Route::post('addclass',[ClassesController::class,'store']); // create
 Route::put('newClass/{id}',[ClassesController::class,'update']); //update
 Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
@@ -62,6 +80,12 @@ Route::delete('delClass/{id}',[ClassesController::class,'destory']); //destory
 Route::post('addmembership',[MemeberShipController::class,'store']); // create   
 Route::put('newmembership/{id}',[MemeberShipController::class,'update']); //update
 Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //destory
+//trainer
+Route::post('/trainers',[TrainerController::class,'store']);
+Route::post('/trainer/{id}',[TrainerController::class,'update']);
+Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
+
+
 }) ;
 
 //   -------------------------------------------------------------------- // 
@@ -70,6 +94,13 @@ Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //
 Route::group(['prefix' => 'user'],function (){
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
+Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
+
+//products
+Route::get('/products',[ProductController::class,'index']);
+Route::get('/products/{id}',[ProductController::class,'show']);
+
+
 ///classes
 Route::get('allclass',[ClassesController::class,'index']); // getall
 Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
@@ -84,5 +115,17 @@ Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
 // VerificationEmail
 Route::post('emailVerification',[verification::class,'verifyEmail']);
 Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('verification.verify');
+
+
+// Route::get('test',[ClassesController::class,'test']); // for testing
+Route::get('todayclass',[ClassesController::class,'TodayClass']);
+Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+
+//trainer
+Route::get('/trainers',[TrainerController::class,'index']);
+Route::get('/trainer/{id}',[TrainerController::class,'show']);
+
+
 }) ;
+
 

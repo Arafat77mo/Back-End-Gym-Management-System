@@ -27,6 +27,8 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
         'address',
         'phone',
         'gender',
+        'image',
+        'status',
     ];
 
     /**
@@ -57,5 +59,5 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
      */
     public function getJWTCustomClaims() {
         return [];
-    }    
+    }
 }
