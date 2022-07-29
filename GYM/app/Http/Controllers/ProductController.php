@@ -17,9 +17,6 @@ public function index()
  $product =ProductResource::collection(Product::get());
  $msg=['your data returned successfully '];
    return $this->apiresponse($product,$msg,200);
-
-
-
 //  return response($product,200,$msg);
 }
 
@@ -37,11 +34,17 @@ public function show($id)
     $msg=['this  product not found '];
     return $this->apiresponse($product,$msg,401);
  }
-
-
-
-
 //  return response($product,200,$msg);
 }
+
+public function RelatedProducts($id)
+    {
+        $books = Product::find($id);
+        $relation = Product::where('id',$id)->with('categories')->first();
+        $category_id = $relation->category_id;
+        $relatedbooks = Product::where('category_id',$category_id)->get();
+        return  ($relatedbooks);
+    }
+
 
 }

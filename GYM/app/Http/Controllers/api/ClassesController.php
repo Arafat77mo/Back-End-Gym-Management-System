@@ -41,7 +41,7 @@ class ClassesController extends Controller
         $class = Session::create([
             "id" => $request->id,
             "name" =>$request->name,
-            "Duaration" =>$request->schedule_time,
+            "Duaration" =>$request->Duaration,
             'discount' => $request->discount,
             "description" =>$request->description,
             "price"=>$request->price,
@@ -55,8 +55,10 @@ class ClassesController extends Controller
 
     public function index(){
         // $classes = Session::all();
-       $classes = classResource::collection(Session::all());
-        return $this->returnData('all classes',$classes,'all your classes','200');
+    //    $classes = classResource::collection(Session::all());
+    $classes = Session::all();
+        // return $this->returnData('all classes',$classes,'all your classes','200');
+        return($classes);
     }
 
     public function update(Request $request,$id){
@@ -137,15 +139,17 @@ class ClassesController extends Controller
         public function TodayClass(){
 
             $today = Carbon::today()->format('l');
-            $class = classResource::collection(Session::where('Day',$today)->get());
+            // $class = classResource::collection(Session::where('Day',$today)->get());
+            $class = Session::where('Day',$today)->get();
 
-            return $this->returnData('Our Class Today',$class,'classesToday','200');
+            // return $this->returnData('Our Class Today',$class['name'],'classesToday','200');
+            return $class;
         }
 
 
         public function NextDayClass(){
 
-            $tomorrow = Carbon::tomorrow()->format('l');;
+            $tomorrow = Carbon::tomorrow()->format('l');
             $class = classResource::collection(Session::where('Day',$tomorrow)->get());
 
             return $this->returnData('Our Class NextDay',$class,'classessTomorrow','200');

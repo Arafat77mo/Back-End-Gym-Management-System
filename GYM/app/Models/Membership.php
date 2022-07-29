@@ -9,4 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Membership extends Model
 {
     use HasFactory, softDeletes;
+
+    protected $fillable = ['id','type','price','image'];
 }
