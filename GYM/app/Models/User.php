@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes ;
 
@@ -23,6 +24,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'phone',
+        'gender',
+        'image',
+        'status',
     ];
 
     /**
@@ -47,5 +53,16 @@ class User extends Authenticatable
 
     public function singleworkout(){
         return $this->belongsToMany(related:'App\Model\SingleWorkoutCaregory',table:'single_workout_users',foreignPivotKey:'user_id',relatedPivotKey:'single_workout_caregorie_id',parentKey:'id',relatedKey:'id');
+    public function getJWTIdentifier() {
+        return $this->getKey();
     }
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims() {
+        return [];
+    }
+}
 }

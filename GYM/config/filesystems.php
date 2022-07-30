@@ -58,6 +58,13 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'classes' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/classess/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -68,6 +75,23 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+
+        'trainers' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/Trainers/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
+
+        'users' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/users/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
+
 
     ],
 
@@ -85,5 +109,6 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
 
 ];
