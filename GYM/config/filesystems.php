@@ -64,6 +64,12 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'Memberships' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/Membership/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',
