@@ -16,7 +16,7 @@
         "tymon/jwt-auth": "dev-develop",
         "nesbot/carbon": "^2.59",
         "pusher/pusher-php-server": "~3.0"
-        // "tymon/jwt-auth": "^1.0"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -66,6 +66,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
+
     },
     "minimum-stability": "dev",
     "prefer-stable": true
