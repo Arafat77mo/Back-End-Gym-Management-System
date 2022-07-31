@@ -8,6 +8,19 @@ use App\Http\Controllers\api\verification;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SingleWorkoutController;
+use App\Http\Controllers\ExerciseController;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
 use App\Http\Controllers\AuthController;
 use App\Models\Admin;
 use App\Http\Controllers\AdminController;
@@ -22,6 +35,7 @@ use App\Http\Controllers\AdminController;
 |
 */
 use App\Http\Controllers\MessagesController;
+
 
 
 
@@ -64,7 +78,7 @@ Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
 
 Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
     Route::post('messages', [MessagesController::class, 'sendMessage']);
-    Route::post('messageDirect', [MessagesController::class, 'sendDirectMessage']); 
+    Route::post('messageDirect', [MessagesController::class, 'sendDirectMessage']);
 
 //users
 Route::get('/users/status/{user_id}/{status_code}',[AuthController::class,'updateStatus'])->name('users.status.update');
@@ -88,6 +102,7 @@ Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
 
 }) ;
 
+Route::get('/products',[ProductController::class,'index']);
 //   -------------------------------------------------------------------- // 
 
 ////middleware user
@@ -97,9 +112,28 @@ Route::get('/products/{id}',[ProductController::class,'show']);
 Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
 
 //products
-Route::get('/products',[ProductController::class,'index']);
+
 Route::get('/products/{id}',[ProductController::class,'show']);
 
+Route::post('/products',[ProductController::class,'store']);
+Route::post('/products/{id}',[ProductController::class,'update']);
+Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
+
+
+
+// single workout category
+Route::get('/singleworkout',[SingleWorkoutController::class,'list']);
+Route::get('/singleworkout/{id}',[SingleWorkoutController::class,'show']);
+Route::post('/singleworkout',[SingleWorkoutController::class,'store']);
+Route::delete('/singleworkout/{id}',[SingleWorkoutController::class,'deletecategory']);
+Route::post('/singleworkout/{id}',[SingleWorkoutController::class,'updatecategory']);
+
+// get exercises by category id
+
+Route::get('/exercies/{id}',[ExerciseController::class,'listexercies']);
+Route::post('/exercies',[ExerciseController::class,'store']);
+Route::delete('/exercies/{id}',[ExerciseController::class,'deleteexercise']);
+Route::post('/exercies/{id}',[ExerciseController::class,'updateExercies']);
 
 ///classes
 Route::get('allclass',[ClassesController::class,'index']); // getall

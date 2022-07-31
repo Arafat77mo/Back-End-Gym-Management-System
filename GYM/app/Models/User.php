@@ -49,6 +49,14 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // public function singleworkout(){
+        // return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
+        // table:'single_workout_users',
+        // foreignPivotKey:'user_id',
+        // relatedPivotKey:'single_workout_caregorie_id',
+        // parentKey:'id',relatedKey:'id');
     public function getJWTIdentifier() {
         return $this->getKey();
     }
@@ -61,3 +69,4 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
         return [];
     }
 }
+

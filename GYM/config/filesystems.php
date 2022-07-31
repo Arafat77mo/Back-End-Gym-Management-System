@@ -40,6 +40,23 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],'products' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/products/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+        'exercies' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/exercies/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+        'singleWorkout' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/singleWorkout/',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
         ],
         'classes' => [
             'driver' => 'local',
@@ -72,7 +89,7 @@ return [
             'visibility' => 'public',
         ],
 
-        
+
         'users' => [
             'driver' => 'local',
             'root' => public_path() . '/assets/images/users/',
