@@ -41,9 +41,9 @@ class AdminController extends Controller
                 return $this->returnError('E001', 'بيانات الدخول غير صحيحة');
 
             $admin = Auth::guard('admin-api')->user();
-            $admin ->api_token = $token;
+            $admin ->access_token = $token;
             //return token
-            return $this->returnData('admin', $admin,"you login successfully");  //return json response
+            return $this->returnData('admin', $admin);  //return json response
 
         } catch (\Exception $ex) {
             return $this->returnError($ex->getCode(), $ex->getMessage());

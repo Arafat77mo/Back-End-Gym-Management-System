@@ -22,11 +22,11 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('checkAdminToken:api');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+   
+ Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 
 });
-
 
 Route::group([
 
@@ -91,12 +91,13 @@ Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrai
 // Route::get('test',[ClassesController::class,'test']); // for testing
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
-
+//member
+Route::post('/member',[MemberController::class,'store']);
 //trainer
-Route::get('/trainers',[TrainerController::class,'index']);
-Route::get('/trainer/{id}',[TrainerController::class,'show']);
-
 
 }) ;
+
+Route::get('/trainers',[TrainerController::class,'index']);
+Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
 

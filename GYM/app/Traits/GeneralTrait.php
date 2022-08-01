@@ -29,17 +29,9 @@ trait GeneralTrait
         ];
     }
 
-    public function returnData($key, $value, $msg = "")
+    public function returnData($key, $value)
     {
         return response()->json([
-            $key => $value,
-            'status' => true,
-            'errNum' => "S000",
-            'msg' => $msg,
-
-            'status' => true,
-            'errNum' => "S000",
-            'msg' => $msg,
             $key => $value
         ]);
     }
