@@ -3,7 +3,6 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+// class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements JWTSubject,MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes ;
 
@@ -49,6 +49,14 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // public function singleworkout(){
+        // return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
+        // table:'single_workout_users',
+        // foreignPivotKey:'user_id',
+        // relatedPivotKey:'single_workout_caregorie_id',
+        // parentKey:'id',relatedKey:'id');
     public function getJWTIdentifier() {
         return $this->getKey();
     }
@@ -61,3 +69,4 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 }
+
