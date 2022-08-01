@@ -12,7 +12,7 @@ class Exercise extends Model
     protected $fillable = ['name','equipment','discription','image','sets','reps','rest','single_workout_caregorie_id'];
     protected $hidden=['created_at','updated_at'];
 
-    public function Slingleworkoutcategory (){
-        return $this->belongsTo(related:'App\Models\SingleWorkoutCaregory',foreignKey:'single_workout_caregorie_id',ownerKey:'id');
-    }
+    // public function Slingleworkoutcategory (){
+    //     return $this->belongsTo(related:'App\Models\SingleWorkoutCaregory',foreignKey:'single_workout_caregorie_id',ownerKey:'id');
+    // }
 }

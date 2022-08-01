@@ -48,11 +48,11 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('checkAdminToken:api');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+   
+ Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 
 });
-
 
 Route::group([
 
@@ -98,26 +98,25 @@ Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //
 Route::post('/trainers',[TrainerController::class,'store']);
 Route::post('/trainer/{id}',[TrainerController::class,'update']);
 Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
+//product
+Route::post('/products',[ProductController::class,'store']);
+Route::post('/products/{id}',[ProductController::class,'update']);
+Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
+Route::get('/products/{id}',[ProductController::class,'show']);
+
+
 
 
 }) ;
 
-Route::get('/products',[ProductController::class,'index']);
 //   -------------------------------------------------------------------- // 
 
 ////middleware user
-Route::group(['prefix' => 'user'],function (){
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/{id}',[ProductController::class,'show']);
 Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
 
 //products
+Route::get('/products',[ProductController::class,'index']);
 
-Route::get('/products/{id}',[ProductController::class,'show']);
-
-Route::post('/products',[ProductController::class,'store']);
-Route::post('/products/{id}',[ProductController::class,'update']);
-Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
 
 
 
@@ -154,12 +153,14 @@ Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('ver
 // Route::get('test',[ClassesController::class,'test']); // for testing
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+//member
+Route::post('/member',[MemberController::class,'store']);
 
-//trainer
-Route::get('/trainers',[TrainerController::class,'index']);
-Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
 
 }) ;
+//trainer
+Route::get('/trainers',[TrainerController::class,'index']);
+Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
 

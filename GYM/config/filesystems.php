@@ -92,7 +92,7 @@ return [
 
         'users' => [
             'driver' => 'local',
-            'root' => public_path() . '/assets/images/users/',
+            'root' => public_path() . '/assets/users/',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
