@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Resources;
-use App\Http\Controllers\ProductController;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class emberResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +14,13 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'price'=>$this->price,
-            'amount'=>$this->amount,
-            'details'=>$this->details,
-            'image'=>$this->image
+        // return [
 
-        ];
+        //     'name'=> $this-> name,
+        //     'phone'=> $this-> phone,
+        //     'gender'=> $this-> gender,
+        //     'image'=> $this-> image,
+        //     'session_id'=> $this-> session_id
+        // ];
     }
 }

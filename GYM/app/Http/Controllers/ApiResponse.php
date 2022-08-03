@@ -7,15 +7,16 @@ namespace App\Http\Controllers;
 trait ApiResponse
 
 {
- public function apiresponse($data=null,$msg=null, $status=null)
+ public function apiresponse($data=null,$msg=null,$status)
  {
     $array=[
         'data'=>$data,
-        'message'=>$msg,
-        'status'=>$status
+        'msg'=>$msg,
+        'status'=>$status,
+
 
     ];
-    return response( $array);
+    return response( $array,$status);
 
  }
 
