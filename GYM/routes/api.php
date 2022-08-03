@@ -62,10 +62,9 @@ Route::get('/getTrainer/{id}',[TrainerController::class,'getTrainer']);
 
 
 
-Route::group(['prefix' => 'admin' ,'middleware' => 'checkAdminToken:admin-api'],function (){
+Route::group(['prefix' => 'admin' ],function (){
     Route::post('messages', [MessagesController::class, 'sendMessage']);
     Route::post('messageDirect', [MessagesController::class, 'sendDirectMessage']); 
-
 //users
 Route::get('/users/status/{user_id}/{status_code}',[AuthController::class,'updateStatus'])->name('users.status.update');
 Route::get('/users',[AuthController::class,'index']);
@@ -82,8 +81,8 @@ Route::put('newmembership/{id}',[MemeberShipController::class,'update']); //upda
 Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //destory
 //trainer
 Route::post('/trainers',[TrainerController::class,'store']);
-Route::post('/trainer/{id}',[TrainerController::class,'update']);
-Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
+Route::put('/trainer/{id}',[TrainerController::class,'update']);
+Route::delete('/trainers/{id}',[TrainerController::class,'destroy']);
 
 
 }) ;
@@ -91,16 +90,14 @@ Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
 //   -------------------------------------------------------------------- // 
 
 ////middleware user
-Route::group(['prefix' => 'user'],function (){
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/{id}',[ProductController::class,'show']);
-Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
+// Route::group(['prefix' => 'user'],function (){
+// Route::get('/products',[ProductController::class,'index']);
+// Route::get('/products/{id}',[ProductController::class,'show']);
+Route::group(['prefix' => 'auth'],function (){
 
 //products
 Route::get('/products',[ProductController::class,'index']);
 Route::get('/products/{id}',[ProductController::class,'show']);
-
-
 ///classes
 Route::get('allclass',[ClassesController::class,'index']); // getall
 Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
@@ -124,8 +121,5 @@ Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
 //trainer
 Route::get('/trainers',[TrainerController::class,'index']);
 Route::get('/trainer/{id}',[TrainerController::class,'show']);
-
-
 }) ;
-
 

@@ -18,13 +18,13 @@ class CheckBanned
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && (auth()->user()->status == 0)){
-            Auth::logout();
+        // if (auth()->check() && (auth()->user()->status == 0)){
+        //     Auth::logout();
 
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect()->route('login')->with('error', 'Your Account is Suspended , please contact the admin.');
-        }
+        //     $request->session()->invalidate();
+        //     $request->session()->regenerateToken();
+        //     return redirect()->route('login')->with('error', 'Your Account is Suspended , please contact the admin.');
+        // }
         return $next($request);
     }
 }

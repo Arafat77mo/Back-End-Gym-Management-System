@@ -41,7 +41,7 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-        'classes' => [
+        'classess' => [
             'driver' => 'local',
             'root' => public_path() . '/assets/images/classess/',
             'url' => env('APP_URL') . '/public',

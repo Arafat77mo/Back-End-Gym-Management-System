@@ -34,7 +34,7 @@ class ClassesController extends Controller
 
 
             $fileSystem = "";
-            $fileSystem = uploadImage("classes",$request->image);
+            $fileSystem = uploadImage("classess",$request->image);
         
         // $class = Session::create($request->all());
 
@@ -50,7 +50,8 @@ class ClassesController extends Controller
             "image" => $fileSystem
         ]);
 
-        return $this->returnData('addedclass',new classResource($class),'class added successfully','201');
+        // return $this->returnData('addedclass',new classResource($class),'class added successfully','201');
+        return $class;
     }
 
     public function index(){
@@ -68,14 +69,14 @@ class ClassesController extends Controller
         return $this->returnError('404','the Class NotFound');
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:Sessions|max:255',
-            'Duaration' => 'required',
-            'discount' => 'required',
-            'description' => 'required|max:255',
+            'name' => 'max:255',
+            'Duaration' => '',
+            'discount' => '',
+            'description' => '|max:255',
             "price" => 'numeric |regex:/^\d+(\.\d{1,2})?$/',
-            "Day" => 'required',
-            "Time" => 'required',
-            "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            "Day" => '',
+            "Time" => '',
+            // "image" => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if ($validator->fails())
@@ -89,20 +90,23 @@ class ClassesController extends Controller
         $class->price = $request->price;
         $class->Day = $request->Day;
         $class->Time = $request->Time;
-        if ($request->has("image"))
-        $filePath = uploadImage("classes",$request->image);
-        $class->image = $filePath;
+        // if ($request->has("image"))
+        // $filePath = uploadImage("classes",$request->image);
+        // $class->image = $filePath;
         $class->update();
         // $class::update($request->all());
         // $class->save();
-        return $this->returnData('newClass',new classResource($class),'class updated successfully','201');
+        // return $this->returnData('newClass',new classResource($class),'class updated successfully','201');
+        return $class;
     }
 
     public function show($id){
 
         $class = session::find($id);
         if($class)
-        return $this->returnData('yourClass',new classResource($class),'selected Class','200');
+        // return $this->returnData('yourClass',new classResource($class),'selected Class','200');
+
+        return $class;
 
         return $this->returnError('404','the Class NotFound');
     }
@@ -127,7 +131,8 @@ class ClassesController extends Controller
             $trainerName =  $trainere -> name;
             // echo $trainerName;
             }
-            return $this->returnData('TrainerName',$trainerName,'trainerNameSuccefully','200');
+            // return $this->returnData('TrainerName',$trainerName,'trainerNameSuccefully','200');
+            return $trainerName;
         }
 
         // public function test(){
@@ -150,7 +155,9 @@ class ClassesController extends Controller
         public function NextDayClass(){
 
             $tomorrow = Carbon::tomorrow()->format('l');
-            $class = classResource::collection(Session::where('Day',$tomorrow)->get());
+            // $class = classResource::collection(Session::where('Day',$tomorrow)->get());
+            $class = (Session::where('Day',$tomorrow)->get());
+            return $class;
 
             return $this->returnData('Our Class NextDay',$class,'classessTomorrow','200');
         }

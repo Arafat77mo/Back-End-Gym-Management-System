@@ -12,8 +12,10 @@ class TrainerController extends Controller
 {
     public function index()
     {
-        $trainers = TrainerResource::collection(Trainer::get());
-        return response($trainers, 200);
+        // $trainers = TrainerResource::collection(Trainer::get());
+        $trainers = Trainer::all();
+        // return response($trainers, 200);
+        return $trainers;
     }
 
     public function show($id)
@@ -23,7 +25,8 @@ class TrainerController extends Controller
 
         if ($trainer) {
 
-            return response(new TrainerResource($trainer), 200);
+            // return response(new TrainerResource($trainer), 200);
+            return $trainer;
         }
 
         return response(null, 404);
@@ -44,8 +47,8 @@ class TrainerController extends Controller
             return response($validator->errors(), 400);
         }
 
-            $fileSystem = "";
-            $fileSystem = uploadImage("trainers",$request->image);
+            // $fileSystem = "";
+            // $fileSystem = uploadImage("trainers",$request->image);
 
         // $trainer = Trainer::create($request->all());
 
@@ -54,12 +57,15 @@ class TrainerController extends Controller
             "name" =>$request->name,
             "phone" =>$request->phone,
             'gender' => $request->gender,
-            "image" => $fileSystem
+            'decription' =>$request->decription,
+            'session_id' => $request->session_id,
+            // "image" => $fileSystem
         ]);
 
         if ($trainer) {
 
-            return response(new TrainerResource($trainer), 201);
+            // return response(new TrainerResource($trainer), 201);
+            return $trainer;
         }
         return response(null, 400);
     }
@@ -90,7 +96,8 @@ class TrainerController extends Controller
 
         if ($trainer) {
 
-            return response(new TrainerResource($trainer), 201);
+            // return response(new TrainerResource($trainer), 201);
+            return $trainer;
         }
     }
 
