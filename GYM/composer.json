@@ -13,10 +13,9 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "tymon/jwt-auth": "dev-develop",
         "nesbot/carbon": "^2.59",
-        "pusher/pusher-php-server": "~3.0"
-
+        "pusher/pusher-php-server": "~3.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -49,7 +49,10 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function comments () {
 
+        return $this -> hasMany('App\Models\Trainer','user_id');
+    }
 
     // public function singleworkout(){
         // return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
