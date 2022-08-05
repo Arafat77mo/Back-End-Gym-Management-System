@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SingleWorkoutController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +115,7 @@ Route::get('/products/{id}',[ProductController::class,'show']);
 //   -------------------------------------------------------------------- // 
 
 ////middleware user
-Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
+Route::group(['prefix' => 'auth'],function (){
 
 //products
 Route::get('/products',[ProductController::class,'index']);
@@ -140,9 +143,7 @@ Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
 Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
-/// membership
-Route::get('allmembership',[MemeberShipController::class,'index']); // getall
-Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
+
 // RelatedProducts
 Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
 // VerificationEmail
@@ -163,4 +164,13 @@ Route::post('/member',[MemberController::class,'store']);
 Route::get('/trainers',[TrainerController::class,'index']);
 Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
+//comment
+Route::get('/comment',[CommentController::class,'index']);
+Route::get('/comment/{id}',[CommentController::class,'show']);
+Route::post('/comments',[CommentController::class,'store']);
+Route::delete('/comments/{id}',[CommentController::class,'destory']);
 
+
+/// membership
+Route::get('allmembership',[MemeberShipController::class,'index']); // getall
+Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
