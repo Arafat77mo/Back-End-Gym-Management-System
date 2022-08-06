@@ -12,6 +12,9 @@ use App\Http\Controllers\SingleWorkoutController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\SingleWorkourUsersController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,11 +53,11 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('checkAdminToken:api');
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+   
+ Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 
 });
-
 
 Route::group([
 
@@ -100,6 +103,13 @@ Route::delete('delmembership/{id}',[MemeberShipController::class,'destory']); //
 Route::post('/trainers',[TrainerController::class,'store']);
 Route::post('/trainer/{id}',[TrainerController::class,'update']);
 Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
+//product
+Route::post('/products',[ProductController::class,'store']);
+Route::post('/products/{id}',[ProductController::class,'update']);
+Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
+Route::get('/products/{id}',[ProductController::class,'show']);
+
+
 
 
 
@@ -108,8 +118,13 @@ Route::post('/trainers/{id}',[TrainerController::class,'destroy']);
 ////middleware user
 Route::get('/products/{id}',[ProductController::class,'show']);
 Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){}) ;
+//   -------------------------------------------------------------------- // 
+
+////middleware user
+Route::group(['prefix' => 'auth'],function (){
 
 //products
+Route::get('/products',[ProductController::class,'index']);
 
 
 Route::post('/products',[ProductController::class,'store']);
@@ -119,6 +134,7 @@ Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
 Route::get('/products/category/{id}',[ProductController::class,'productByCategory']);
 // all categories
 Route::get('/category',[ProductController::class,'allCtegory']);
+
 
 
 
@@ -160,9 +176,7 @@ Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
 Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
-/// membership
-Route::get('allmembership',[MemeberShipController::class,'index']); // getall
-Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
+
 // RelatedProducts
 Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
 // VerificationEmail
@@ -173,7 +187,12 @@ Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('ver
 // Route::get('test',[ClassesController::class,'test']); // for testing
 Route::get('todayclass',[ClassesController::class,'TodayClass']);
 Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+//member
+Route::post('/member',[MemberController::class,'store']);
 
+
+
+}) ;
 //trainer
 Route::get('/trainers',[TrainerController::class,'index']);
 Route::get('/trainer/{id}',[TrainerController::class,'show']);
@@ -184,3 +203,14 @@ Route::get('/trainer/{id}',[TrainerController::class,'show']);
 
 
 Route::get('/products',[ProductController::class,'index']);
+
+//comment
+Route::get('/comment',[CommentController::class,'index']);
+Route::get('/comment/{id}',[CommentController::class,'show']);
+Route::post('/comments',[CommentController::class,'store']);
+Route::delete('/comments/{id}',[CommentController::class,'destory']);
+
+
+/// membership
+Route::get('allmembership',[MemeberShipController::class,'index']); // getall
+Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show

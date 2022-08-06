@@ -18,4 +18,7 @@ class Exercise extends Model
 
 
     }
+    // public function Slingleworkoutcategory (){
+    //     return $this->belongsTo(related:'App\Models\SingleWorkoutCaregory',foreignKey:'single_workout_caregorie_id',ownerKey:'id');
+    // }
 }

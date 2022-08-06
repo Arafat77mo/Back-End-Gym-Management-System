@@ -43,7 +43,7 @@ class MemeberShipController extends Controller
 
     public function index(){
        $MemberShips = MembershipResource::collection(Membership::all());
-        return $this->returnData('all MemberShips',$MemberShips,'all your MemberShips','200');
+        return $this->returnData('allMemberShips',$MemberShips,'all your MemberShips','200');
     }
 
     public function update(Request $request,$id){
