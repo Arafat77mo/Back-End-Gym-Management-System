@@ -29,6 +29,9 @@ class Session extends Model
 
     protected $fillable = ['name','Duaration','discount','description','price','Day','Time','image'];
 
+    public function comments () {
 
+        return $this -> hasMany('App\Models\Trainer','session_id');
+    }
 
 }

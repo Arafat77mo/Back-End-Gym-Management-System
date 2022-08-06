@@ -20,7 +20,7 @@ class CreateExercisesTable extends Migration
             $table->string('discription');
             $table->integer('sets');
             $table->integer('reps');
-            $table->time('rest');
+            $table->integer('rest');
             $table->string('image');
             $table->unsignedBigInteger('single_workout_caregorie_id');
             $table->foreign('single_workout_caregorie_id')->references('id')->on('single_workout_caregories');

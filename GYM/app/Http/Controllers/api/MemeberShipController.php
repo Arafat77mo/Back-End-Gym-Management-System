@@ -43,10 +43,15 @@ class MemeberShipController extends Controller
     }
 
     public function index(){
+<<<<<<< HEAD
     //    $MemberShips = MembershipResource::collection(Membership::all());
        $MemberShips = Membership::all();
        return $MemberShips;
         // return $this->returnData('all MemberShips',$MemberShips,'all your MemberShips','200');
+=======
+       $MemberShips = MembershipResource::collection(Membership::all());
+        return $this->returnData('allMemberShips',$MemberShips,'all your MemberShips','200');
+>>>>>>> aee70bbc41b069c598e962a9e2c260ce409bc411
     }
 
     public function update(Request $request,$id){

@@ -9,6 +9,39 @@ use App\Http\Controllers\ApiResponse;
 class ExerciseController extends Controller
 { use ApiResponse;
 
+
+
+    public function gitAllExercies()
+    {
+
+     $product =Exercise::get();
+     $msg=['your data returned successfully '];
+
+    return($product) ;
+
+
+
+
+    //    return $this->apiresponse($product,$msg,200);
+    //  return response($product,200,$msg);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ////get exerciese by category id
     public function listexercies($id)
     {
@@ -22,9 +55,9 @@ class ExerciseController extends Controller
         // return response()->json($workoutCategory);
 
          $msg=['the  exercies return successfully '];
-         return $this->apiresponse(  $workoutCategory->exercies,$msg,200);
+        //  return $this->apiresponse(  $workoutCategory->exercies,$msg,200);
 
-        //  return $workoutCategory->exercies;
+         return $workoutCategory->exercies;
 
     }
     else{
@@ -83,12 +116,13 @@ class ExerciseController extends Controller
         public function updateExercies(request $request,$id){
             $exercies=Exercise::find($id);
 
-            $exercies->update($request->all());
+
 
             //   return $this->$exercies;
            if($exercies){
              $msg=['the  exercies updated successfully '];
-            return $this->apiresponse($exercies,$msg,200);
+               $exercies->update($request->all());
+              return $exercies;
          }
          else{
             return['result'=>'exercise not  found'];
@@ -112,4 +146,32 @@ class ExerciseController extends Controller
 
                }
         }
+
+
+
+
+
+
+        public function exerciesdatails($id)
+        {
+
+         $exercies= Exercise::find($id);
+         if ($exercies){
+            // return response()->json($product);
+            return $exercies;
+
+            //  $msg=['the  product return successfully '];
+        //    return $this->apiresponse(new ProductResource($product));
+        // return $this->apiresponse( $exercies,$msg,200);
+
+
+
+         }else{
+            $msg=['this  exercies not found '];
+            return $this->apiresponse($exercies,$msg,404);
+         }
+
+
+        }
+
 }

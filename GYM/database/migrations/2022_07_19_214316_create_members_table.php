@@ -18,6 +18,10 @@ class CreateMembersTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('membership_id');
+            $table->foreign('membership_id')->references('id')->on('memberships');
+
+            $table->Integer('expire')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

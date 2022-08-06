@@ -28,7 +28,6 @@ class AddCoulmnToMemberships extends Migration
     public function down()
     {
         Schema::table('memberships', function (Blueprint $table) {
-            $table->dropColumn('member_id');
             $table->dropColumn('price');
         });
     }

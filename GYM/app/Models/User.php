@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use App\Models\SingleWorkoutCaregory;
 // class User extends Authenticatable implements MustVerifyEmail
 class User extends Authenticatable implements JWTSubject,MustVerifyEmail
 {
@@ -49,14 +49,34 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function comments () {
 
+        return $this -> hasMany('App\Models\Trainer','user_id');
+    }
 
     // public function singleworkout(){
-        // return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
-        // table:'single_workout_users',
-        // foreignPivotKey:'user_id',
-        // relatedPivotKey:'single_workout_caregorie_id',
-        // parentKey:'id',relatedKey:'id');
+    //     return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
+    //     table:'single_workout_users',
+    //     foreignPivotKey:'user_id',
+    //     relatedPivotKey:'single_workout_caregorie_id',
+    //     parentKey:'id',relatedKey:'id');
+    // }
+
+
+
+public function categories(){
+        return $this-> belongsToMany ('App\Models\SingleWorkoutCaregory',
+        'single_workout_users',
+        'user_id',
+        'single_workout_caregorie_id',
+        'id','id');
+    }
+    //  public function categories()
+    //  {
+    // return $this->belongsToMany(SingleWorkoutCaregory::class,'users','id');
+    //  }
+
+
     public function getJWTIdentifier() {
         return $this->getKey();
     }
