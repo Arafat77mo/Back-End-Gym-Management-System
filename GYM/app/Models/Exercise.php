@@ -13,6 +13,9 @@ class Exercise extends Model
     protected $hidden=['created_at','updated_at'];
 
     public function Slingleworkoutcategory (){
-        return $this->belongsTo(related:'App\Models\SingleWorkoutCaregory',foreignKey:'single_workout_caregorie_id',ownerKey:'id');
+        // return $this->belongsTo(related:'App\Models\SingleWorkoutCaregory',foreignKey:'single_workout_caregorie_id',ownerKey:'id');
+        return $this -> belongsTo('App\Models\SingleWorkoutCaregory','single_workout_caregorie_id');
+
+
     }
 }
