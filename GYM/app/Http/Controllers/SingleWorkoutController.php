@@ -20,8 +20,9 @@ class SingleWorkoutController extends Controller
             return ('empty');
         }
         // return response()->json($workoutCategory);
-       return $this->apiresponse( $workoutCategory,$msg,200);
+    //    return $this->apiresponse( $workoutCategory,$msg,200);
 
+    return $workoutCategory;
     }
 
 
@@ -43,7 +44,7 @@ class SingleWorkoutController extends Controller
         // return response()->json($workoutCategory);
 
          $msg=['the  category return successfully '];
-         return $this->apiresponse( $workoutCategory,$msg,200);
+         return  $workoutCategory;
 
 
     }
@@ -123,7 +124,7 @@ public function updatecategory(request $request,$id){
 
    if($singleworkout){
 
-    return response($singleworkout);
+    return $singleworkout;
  }
  else{
     return['result'=>'category not  found'];
