@@ -47,8 +47,8 @@ class TrainerController extends Controller
             return response($validator->errors(), 400);
         }
 
-            // $fileSystem = "";
-            // $fileSystem = uploadImage("trainers",$request->image);
+            $fileSystem = "";
+            $fileSystem = uploadImage("trainers",$request->image);
 
         // $trainer = Trainer::create($request->all());
 
@@ -59,7 +59,7 @@ class TrainerController extends Controller
             'gender' => $request->gender,
             'decription' =>$request->decription,
             'session_id' => $request->session_id,
-            // "image" => $fileSystem
+            "image" => $fileSystem
         ]);
 
         if ($trainer) {

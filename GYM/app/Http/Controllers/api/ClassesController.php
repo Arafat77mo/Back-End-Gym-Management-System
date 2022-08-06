@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use  App\Models\Session;
+use  App\Models\Trainer;
+use  App\Models\User;
+use  App\Models\Member;
 use App\Http\Resources\classResource;
 use Validator;
 use Carbon\Carbon;
@@ -143,7 +146,7 @@ class ClassesController extends Controller
 
         public function TodayClass(){
 
-            $today = Carbon::today()->format('l');
+            $today = Carbon::today()->format('l'); // 
             // $class = classResource::collection(Session::where('Day',$today)->get());
             $class = Session::where('Day',$today)->get();
 
@@ -161,7 +164,49 @@ class ClassesController extends Controller
 
             return $this->returnData('Our Class NextDay',$class,'classessTomorrow','200');
         }
+                //// counting for dashboard
+        public function classesCount(){
+            $class = Session::count();
+            if($class == 0)
+            return 'No class Yet';
+            return $class;
+        }
 
+        
+        public function counttrainer(){
+            $trainer = Trainer::count();
+            if($trainer == 0)
+            return 'no trainer yet';
+            return $trainer;
+        }
+
+        
+        public function Countusers(){
+            $users = User::count();
+            if($users == 0)
+            return 'No users yet';
+            return $users;
+        }
+
+        
+        public function CountMember(){
+            $member = Member::count();
+            if($member == 0)
+            return 'No member yet';
+            return $member;
+        }
+
+        public function getclassMember(){
+            // $sessions = $this->session->with('members')->all();
+            // $session = Member::all();
+            // $allmember = Member::with('session')->get();
+            // return $allmember['session'].name;
+
+           return  Member::query()->with(['session' => function ($query) {
+        $query->select('id', 'name');}])->get();
+            // return $session->with('session');
+        }
+       
 
 
 }

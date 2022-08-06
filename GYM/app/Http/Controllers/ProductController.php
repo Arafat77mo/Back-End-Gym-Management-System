@@ -117,6 +117,7 @@ public function deleteproduct($id){
 
 public function RelatedProducts($id)
     {
+        
         $books = Product::find($id);
         $relation = Product::where('id',$id)->with('categories')->first();
         $category_id = $relation->category_id;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\api\ClassesController;
 use App\Http\Controllers\api\MemeberShipController;
 use App\Http\Controllers\api\verification;
@@ -118,63 +119,59 @@ Route::get('/products/{id}',[ProductController::class,'show']);
 // Route::group(['prefix' => 'user'],function (){
 // Route::get('/products',[ProductController::class,'index']);
 // Route::get('/products/{id}',[ProductController::class,'show']);
-Route::group(['prefix' => 'auth'],function (){
+Route::group(['prefix' => 'auth'],function(){
+    //products
+    Route::get('/products',[ProductController::class,'index']);
+    Route::get('/products/{id}',[ProductController::class,'show']);
+    // single workout category
+    Route::get('/singleworkout',[SingleWorkoutController::class,'list']);
+    Route::get('/singleworkout/{id}',[SingleWorkoutController::class,'show']);
+    Route::post('/singleworkout',[SingleWorkoutController::class,'store']);
+    Route::delete('/singleworkout/{id}',[SingleWorkoutController::class,'deletecategory']);
+    Route::post('/singleworkout/{id}',[SingleWorkoutController::class,'updatecategory']);
+    
+    // get exercises by category id
+    
+    Route::get('/exercies/{id}',[ExerciseController::class,'listexercies']);
+    Route::post('/exercies',[ExerciseController::class,'store']);
+    Route::delete('/exercies/{id}',[ExerciseController::class,'deleteexercise']);
+    Route::post('/exercies/{id}',[ExerciseController::class,'updateExercies']);
+    
+    ///classes
+    Route::get('allclass',[ClassesController::class,'index']); // getall
+    Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
+    Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
+    Route::get('todayclass',[ClassesController::class,'TodayClass']);
+    Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+    /// membership
+    Route::get('allmembership',[MemeberShipController::class,'index']); // getall
+    Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
+    // RelatedProducts
+    Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
+    // VerificationEmail
+    Route::post('emailVerification',[verification::class,'verifyEmail']);
+    Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('verification.verify');
+    // Route::get('test',[ClassesController::class,'test']); // for testing
+    Route::get('todayclass',[ClassesController::class,'TodayClass']);
+    Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
+    //member
+    Route::post('/addmember',[MemberController::class,'store']);
+    // Route::get('/yomember/{id}',[MemberController::class,'getUser']);
+    //trainer
+    Route::get('/trainers',[TrainerController::class,'index']);
+    Route::get('/trainer/{id}',[TrainerController::class,'show']);
+    // counting
+    Route::get('countClass',[ClassesController::class,'classesCount']); // get class Count
+    Route::get('CountTrainer',[ClassesController::class,'counttrainer']); // get class Count
+    Route::get('Countusers',[ClassesController::class,'countusers']); // get class Count
+    Route::get('CountMember',[ClassesController::class,'countmember']); // get class Count
 
-//products
-Route::get('/products',[ProductController::class,'index']);
-Route::get('/products/{id}',[ProductController::class,'show']);
+    /// get records with relationship
+    Route::get('getclassMember',[ClassesController::class,'getclassMember']);
 
-Route::group(['prefix' => 'auth' ,'middleware' => 'checkAdminToken:api'],function (){
+});
 
-//products
-Route::get('/products',[ProductController::class,'index']);
-
-
-
-
-// single workout category
-Route::get('/singleworkout',[SingleWorkoutController::class,'list']);
-Route::get('/singleworkout/{id}',[SingleWorkoutController::class,'show']);
-Route::post('/singleworkout',[SingleWorkoutController::class,'store']);
-Route::delete('/singleworkout/{id}',[SingleWorkoutController::class,'deletecategory']);
-Route::post('/singleworkout/{id}',[SingleWorkoutController::class,'updatecategory']);
-
-// get exercises by category id
-
-Route::get('/exercies/{id}',[ExerciseController::class,'listexercies']);
-Route::post('/exercies',[ExerciseController::class,'store']);
-Route::delete('/exercies/{id}',[ExerciseController::class,'deleteexercise']);
-Route::post('/exercies/{id}',[ExerciseController::class,'updateExercies']);
-
-///classes
-Route::get('allclass',[ClassesController::class,'index']); // getall
-Route::get('yourClass/{id}',[ClassesController::class,'show']); //show
-Route::get('gettrainer/{id}',[ClassesController::class,'getTrainer']); //getTrainer
-Route::get('todayclass',[ClassesController::class,'TodayClass']);
-Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
-/// membership
-Route::get('allmembership',[MemeberShipController::class,'index']); // getall
-Route::get('yourmembership/{id}',[MemeberShipController::class,'show']); //show
-// RelatedProducts
-Route::get('reProducts/{id}',[ProductController::class,'RelatedProducts']);
-// VerificationEmail
-Route::post('emailVerification',[verification::class,'verifyEmail']);
-Route::get('verify-email/{id}/{hash}',[verification::class,'verify'])->name('verification.verify');
-
-
-// Route::get('test',[ClassesController::class,'test']); // for testing
-Route::get('todayclass',[ClassesController::class,'TodayClass']);
-Route::get('tomorrowClass',[ClassesController::class,'NextDayClass']);
-//member
-Route::post('/member',[MemberController::class,'store']);
 
 //trainer
-Route::get('/trainers',[TrainerController::class,'index']);
-Route::get('/trainer/{id}',[TrainerController::class,'show']);
-
-
-}) ;
-//trainer
-Route::get('/trainers',[TrainerController::class,'index']);
-Route::get('/trainer/{id}',[TrainerController::class,'show']);
-
+// Route::get('/trainers',[TrainerController::class,'index']);
+// Route::get('/trainer/{id}',[TrainerController::class,'show']);

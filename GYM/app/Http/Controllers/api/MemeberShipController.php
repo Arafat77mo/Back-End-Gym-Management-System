@@ -20,7 +20,7 @@ class MemeberShipController extends Controller
         $validator = Validator::make($request->all(), [
             'type' => 'required|unique:Memberships|max:255',
             "price" => 'numeric |regex:/^\d+(\.\d{1,2})?$/',
-            // "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if ($validator->fails())
@@ -29,13 +29,13 @@ class MemeberShipController extends Controller
 
 
             // $fileSystem = "";
-            // $fileSystem = uploadImage("Memberships",$request->image);
+            $fileSystem = uploadImage("Membership",$request->image);
         
         $MemberShip = Membership::create([
             "id" => $request->id,
             "type" =>$request->type,
             "price"=>$request->price,
-            // "image" => $fileSystem
+            "image" => $fileSystem
         ]);
 
         // return $this->returnData('AddMemeberships',new MembershipResource($MemberShip),'MemberShip added successfully','201');
