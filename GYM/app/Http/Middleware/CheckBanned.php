@@ -20,14 +20,12 @@ class CheckBanned
     {
         // if (auth()->check() && (auth()->user()->status == 0)){
         //     Auth::logout();
-<<<<<<< HEAD
 
         //     $request->session()->invalidate();
         //     $request->session()->regenerateToken();
         //     return redirect()->route('login')->with('error', 'Your Account is Suspended , please contact the admin.');
         // }
-=======
->>>>>>> aee70bbc41b069c598e962a9e2c260ce409bc411
+
 
         //     $request->session()->invalidate();
         //     $request->session()->regenerateToken();

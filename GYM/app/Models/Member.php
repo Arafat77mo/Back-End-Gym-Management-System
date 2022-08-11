@@ -10,7 +10,7 @@ class Member extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = "members";
-    protected $fillable = ['name','expire','session_id','email'];
+    protected $fillable = ['name','expire','session_id','email','user_id'];
 
     public function user () {
         return $this -> belongsTo('App\Models\User', 'user_id');

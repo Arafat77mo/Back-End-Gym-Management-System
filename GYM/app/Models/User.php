@@ -54,14 +54,10 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
         return $this -> hasMany('App\Models\Trainer','user_id');
     }
 
-    // public function singleworkout(){
-    //     return $this-> belongsToMany (related:'App\Model\SingleWorkoutCaregory',
-    //     table:'single_workout_users',
-    //     foreignPivotKey:'user_id',
-    //     relatedPivotKey:'single_workout_caregorie_id',
-    //     parentKey:'id',relatedKey:'id');
-    // }
+    public function members () {
 
+        return $this -> hasMany('App\Models\Member','user_id');
+    }
 
 
 public function categories(){

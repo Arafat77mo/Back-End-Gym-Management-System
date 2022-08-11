@@ -43,15 +43,12 @@ class MemeberShipController extends Controller
     }
 
     public function index(){
-<<<<<<< HEAD
     //    $MemberShips = MembershipResource::collection(Membership::all());
        $MemberShips = Membership::all();
        return $MemberShips;
         // return $this->returnData('all MemberShips',$MemberShips,'all your MemberShips','200');
-=======
        $MemberShips = MembershipResource::collection(Membership::all());
         return $this->returnData('allMemberShips',$MemberShips,'all your MemberShips','200');
->>>>>>> aee70bbc41b069c598e962a9e2c260ce409bc411
     }
 
     public function update(Request $request,$id){
@@ -61,7 +58,7 @@ class MemeberShipController extends Controller
         return $this->returnError('404','the MemberShip NotFound');
 
         $validator = Validator::make($request->all(), [
-            'type' => 'required|unique:Memberships|max:255',
+            'type' => 'required|max:255',
             "price" => 'numeric |regex:/^\d+(\.\d{1,2})?$/',
             // "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
