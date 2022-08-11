@@ -97,15 +97,16 @@ Route::post('/trainers',[TrainerController::class,'store']);
 Route::put('/trainer/{id}',[TrainerController::class,'update']);
 Route::delete('/trainers/{id}',[TrainerController::class,'destroy']);
 //product
-Route::post('/products',[ProductController::class,'store']);
-Route::post('/products/{id}',[ProductController::class,'update']);
-Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
+
 });
 Route::group(['prefix' => 'auth'],function (){ 
     //   -------------------------------------------------------------------- // 
     //products
     Route::get('/products',[ProductController::class,'index']);
     Route::get('/products/{id}',[ProductController::class,'show']);
+    Route::post('/products',[ProductController::class,'store']);
+    Route::put('/products/{id}',[ProductController::class,'updateproduct']);
+    Route::delete('/products/{id}',[ProductController::class,'deleteproduct']);
     // single workout category
     Route::get('/singleworkout',[SingleWorkoutController::class,'list']);
     Route::get('/singleworkout/{id}',[SingleWorkoutController::class,'show']);
