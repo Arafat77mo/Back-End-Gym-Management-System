@@ -29,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
           Schema::defaultStringLength(191);
 
+        // Schema::defaultStringLength(191);
     }
 }

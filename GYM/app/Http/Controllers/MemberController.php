@@ -16,6 +16,7 @@ class MemberController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
+            'email'=> 'required|email'
         ]);
 
         if ($validator->fails()) {
@@ -33,10 +34,13 @@ class MemberController extends Controller
 
     ################ Relations ################
 
-    public function getUser()
+    public function getUser($id)
     {
         // $user = User::find($id);
+        $member = Member::find($id);
         $user = Auth::user();
+        // return "nass";
+        return $member->user();
         return response() -> json ($user);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use  App\Models\Trainer;
+use  App\Models\Member;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -18,6 +19,12 @@ class Session extends Model
     public function trainers () {
 
         return $this -> hasMany('App\Models\Trainer','session_id');
+    }
+
+
+    public function members () {
+
+        return $this -> hasMany(Member::class,'session_id');
     }
 
     protected $fillable = ['name','Duaration','discount','description','price','Day','Time','image'];

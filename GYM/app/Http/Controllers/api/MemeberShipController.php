@@ -28,8 +28,8 @@ class MemeberShipController extends Controller
             return $this->returnError('404',$validator->errors());
 
 
-            $fileSystem = "";
-            $fileSystem = uploadImage("Memberships",$request->image);
+            // $fileSystem = "";
+            $fileSystem = uploadImage("Membership",$request->image);
         
         $MemberShip = Membership::create([
             "id" => $request->id,
@@ -38,10 +38,15 @@ class MemeberShipController extends Controller
             "image" => $fileSystem
         ]);
 
-        return $this->returnData('AddMemeberships',new MembershipResource($MemberShip),'MemberShip added successfully','201');
+        // return $this->returnData('AddMemeberships',new MembershipResource($MemberShip),'MemberShip added successfully','201');
+        return $MemberShip;
     }
 
     public function index(){
+    //    $MemberShips = MembershipResource::collection(Membership::all());
+       $MemberShips = Membership::all();
+       return $MemberShips;
+        // return $this->returnData('all MemberShips',$MemberShips,'all your MemberShips','200');
        $MemberShips = MembershipResource::collection(Membership::all());
         return $this->returnData('allMemberShips',$MemberShips,'all your MemberShips','200');
     }
@@ -53,9 +58,9 @@ class MemeberShipController extends Controller
         return $this->returnError('404','the MemberShip NotFound');
 
         $validator = Validator::make($request->all(), [
-            'type' => 'required|unique:Memberships|max:255',
+            'type' => 'required|max:255',
             "price" => 'numeric |regex:/^\d+(\.\d{1,2})?$/',
-            "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            // "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if ($validator->fails())
@@ -64,20 +69,21 @@ class MemeberShipController extends Controller
 
         $MemberShip->type = $request->type;
         $MemberShip->price = $request->price;
-        if ($request->has("image"))
-        $filePath = uploadImage("Memberships",$request->image);
-        $MemberShip->image = $filePath;
+        // if ($request->has("image"))
+        // $filePath = uploadImage("Memberships",$request->image);
+        // $MemberShip->image = $filePath;
         $MemberShip->update();
-        return $this->returnData('newMemberShip',new MembershipResource($MemberShip),'MemberShip updated successfully','201');
+        // return $this->returnData('newMemberShip',new MembershipResource($MemberShip),'MemberShip updated successfully','201');
+        return $MemberShip;
     }
 
     public function show($id){
 
         $MemberShip = Membership::find($id);
         if($MemberShip)
-        return $this->returnData('yourMemberShip',new MembershipResource($MemberShip),'selected MemberShip','200');
-
-        return $this->returnError('404','the Class MemberShip');
+        // return $this->returnData('yourMemberShip',new MembershipResource($MemberShip),'selected MemberShip','200');
+            return $MemberShip;
+        return $this->returnError('404','the Class MemberShip Not Found');
     }
 
     public function destory($id){

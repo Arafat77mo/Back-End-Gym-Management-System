@@ -25,6 +25,12 @@ class CheckBanned
         //     $request->session()->regenerateToken();
         //     return redirect()->route('login')->with('error', 'Your Account is Suspended , please contact the admin.');
         // }
+
+
+        //     $request->session()->invalidate();
+        //     $request->session()->regenerateToken();
+        //     return redirect()->route('login')->with('error', 'Your Account is Suspended , please contact the admin.');
+        // }
         
         return $next($request);
     }

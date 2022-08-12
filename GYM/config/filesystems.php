@@ -58,13 +58,13 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
-        'classes' => [
+        'classess' => [
             'driver' => 'local',
             'root' => public_path() . '/assets/images/classess/',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
-        'Memberships' => [
+        'Membership' => [
             'driver' => 'local',
             'root' => public_path() . '/assets/images/Membership/',
             'url' => env('APP_URL') . '/public',
@@ -84,7 +84,7 @@ return [
 
         'trainers' => [
             'driver' => 'local',
-            'root' => public_path() . '/assets/images/Trainers/',
+            'root' => public_path() . '/assets/images/trainers/',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],

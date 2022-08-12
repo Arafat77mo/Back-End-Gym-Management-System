@@ -12,7 +12,7 @@ class Trainer extends Model
     use HasFactory, softDeletes;
 
     protected $table = "trainers";
-    protected $fillable = ['name','phone', 'gender','image','session_id'];
+    protected $fillable = ['name','phone', 'gender','image','session_id','decription'];
 
     public function sessions () {
 

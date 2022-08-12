@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveUserIdToCommentsTable extends Migration
+class DropForignKeysToMember extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class RemoveUserIdToCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);        });
+        Schema::table('members', function (Blueprint $table) {
+            $table->string('email');
+            $table->unsignedBigInteger('session_id');
+            $table->foreign('session_id')->references('id')->on('sessions');
+        });
     }
 
     /**
@@ -24,7 +27,7 @@ class RemoveUserIdToCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
             //
         });
     }
